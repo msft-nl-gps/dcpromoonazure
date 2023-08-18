@@ -1,0 +1,390 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vmlogin": {
+            "type": "string",
+            "metadata": {
+                "description": "The name of the local administrator account for the VM."
+            },
+            "defaultValue": "tdadmin"
+        },
+        "vmPassword": {
+            "type": "securestring",
+            "metadata": {
+                "description": "The password of the local administrator account for the VM."
+            },
+            "defaultValue": "P@ssw0rd1234!"
+        }
+    },
+    "functions": [],
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2022-09-01",
+            "name": "td-nsg",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "securityRules": [
+                    {
+                        "name": "AllowAnyRDPInbound",
+                        "properties": {
+                            "protocol": "TCP",
+                            "sourcePortRange": "*",
+                            "destinationPortRange": "3389",
+                            "sourceAddressPrefix": "*",
+                            "destinationAddressPrefix": "10.230.10.5",
+                            "access": "Allow",
+                            "priority": 100,
+                            "direction": "Inbound",
+                            "sourcePortRanges": [],
+                            "destinationPortRanges": [],
+                            "sourceAddressPrefixes": [],
+                            "destinationAddressPrefixes": []
+                        }
+                    }
+                ]
+            }
+
+        },
+        {
+            "type": "Microsoft.Network/virtualnetworks",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkSecurityGroups', 'td-nsg')]"
+            ],
+            "apiVersion": "2022-09-01",
+            "name": "td-vnet",
+            "location": "[resourceGroup().location]",
+            "properties": {
+
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.230.0.0/16"
+                    ]
+
+                },
+                "subnets": [
+                    {
+                        "name": "td-subnet",
+                        "properties": {
+                            "addressPrefix": "10.230.10.0/24",
+                            "serviceEndpoints": [],
+                            "delegations": [],
+                            "privateEndpointNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled",
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', 'td-nsg')]"
+                            }
+                        },
+                        "type": "Microsoft.Network/virtualNetworks/subnets"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "Microsoft.Network/publicIPAddresses",
+            "name": "td-pip",
+            "sku": {
+                "name": "Standard"
+            },
+            "apiVersion": "2022-09-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "publicIPAllocationMethod": "Static",
+                "publicIPAddressVersion": "IPv4"
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', 'td-vnet')]",
+                "[resourceId('Microsoft.Network/publicIPAddresses', 'td-pip')]"
+            ],
+            "name": "td-mgmt-vm-nic",
+            "apiVersion": "2022-09-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "10.230.10.5",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'td-vnet', 'td-subnet')]"
+                            },
+                            "primary": true,
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', 'td-pip')]"
+                            },
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "microsoft.compute/virtualmachines",
+            "apiVersion": "2022-11-01",
+            "name": "td-mgmt-vm",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', 'td-mgmt-vm-nic')]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_D4s_v5"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2022-datacenter-smalldisk-g2",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "td-mgmt-vm-os-disk",
+                        "createOption": "FromImage",
+                        "caching": "None",
+                        "writeAcceleratorEnabled": false,
+                        "deleteOption": "Detach",
+                        "diskSizeGB": 32
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "tdmgmtvm",
+                    "adminUsername": "[parameters('vmlogin')]",
+                    "adminPassword": "[parameters('vmPassword')]",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS",
+                            "assessmentMode": "ImageDefault",
+                            "enableHotpatching": false
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', 'td-mgmt-vm-nic')]",
+                            "properties": {
+                                "primary": true
+                            }
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": false
+                    }
+                }
+            }
+
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "td-root-dc-nic",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', 'td-vnet')]"
+            ],
+            "apiVersion": "2022-09-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "10.230.10.10",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'td-vnet', 'td-subnet')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type": "microsoft.compute/virtualmachines",
+            "apiVersion": "2022-11-01",
+            "name": "td-root-dc",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', 'td-root-dc-nic')]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_D4s_v5"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2022-datacenter-smalldisk-g2",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "td-root-dc-os-disk",
+                        "createOption": "FromImage",
+                        "caching": "None",
+                        "writeAcceleratorEnabled": false,
+                        "deleteOption": "Detach",
+                        "diskSizeGB": 32
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "tdrootdc",
+                    "adminUsername": "[parameters('vmlogin')]",
+                    "adminPassword": "[parameters('vmPassword')]",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS",
+                            "assessmentMode": "ImageDefault",
+                            "enableHotpatching": false
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', 'td-root-dc-nic')]",
+                            "properties": {
+                                "primary": true
+                            }
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": false
+                    }
+                }
+            }
+
+        },
+        {
+            "type": "Microsoft.Network/networkInterfaces",
+            "name": "td-child-dc-nic",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', 'td-vnet')]"
+            ],
+            "apiVersion": "2022-09-01",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "ipConfigurations": [
+                    {
+                        "name": "ipconfig1",
+                        "properties": {
+                            "privateIPAllocationMethod": "Static",
+                            "privateIPAddress": "10.230.10.20",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', 'td-vnet', 'td-subnet')]"
+                            },
+                            "primary": true,
+                            "privateIPAddressVersion": "IPv4"
+                            
+                        }
+                    }
+                ],
+                "dnsSettings": {
+                    "dnsServers": [
+                        "10.230.10.10"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "microsoft.compute/virtualmachines",
+            "apiVersion": "2022-11-01",
+            "name": "td-child-dc",
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', 'td-child-dc-nic')]"
+            ],
+            "properties": {
+                "hardwareProfile": {
+                    "vmSize": "Standard_D4s_v5"
+                },
+                "storageProfile": {
+                    "imageReference": {
+                        "publisher": "MicrosoftWindowsServer",
+                        "offer": "WindowsServer",
+                        "sku": "2022-datacenter-smalldisk-g2",
+                        "version": "latest"
+                    },
+                    "osDisk": {
+                        "osType": "Windows",
+                        "name": "td-child-dc-os-disk",
+                        "createOption": "FromImage",
+                        "caching": "None",
+                        "writeAcceleratorEnabled": false,
+                        "deleteOption": "Detach",
+                        "diskSizeGB": 32
+                    },
+                    "dataDisks": []
+                },
+                "osProfile": {
+                    "computerName": "tdchilddc",
+                    "adminUsername": "[parameters('vmlogin')]",
+                    "adminPassword": "[parameters('vmPassword')]",
+                    "windowsConfiguration": {
+                        "provisionVMAgent": true,
+                        "enableAutomaticUpdates": true,
+                        "patchSettings": {
+                            "patchMode": "AutomaticByOS",
+                            "assessmentMode": "ImageDefault",
+                            "enableHotpatching": false
+                        }
+                    },
+                    "secrets": [],
+                    "allowExtensionOperations": true
+                },
+                "networkProfile": {
+                    "networkInterfaces": [
+                        {
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', 'td-child-dc-nic')]",
+                            "properties": {
+                                "primary": true
+                            }
+                        }
+                    ]
+                },
+                "diagnosticsProfile": {
+                    "bootDiagnostics": {
+                        "enabled": false
+                    }
+                }
+            }
+
+        }
+    ],
+    "outputs": {
+        "logingVia": {
+            "type": "string",
+            "value": "[reference(resourceId('Microsoft.Network/publicIPAddresses', 'td-pip'), '2022-09-01').ipAddress]"
+        },
+        "loginUsername": {
+            "type": "string",
+            "value": "[parameters('vmlogin')]"
+        },
+        "loginPassword": {
+            "type": "string",
+            "value": "[parameters('vmPassword')]"
+        }
+    }
+}
