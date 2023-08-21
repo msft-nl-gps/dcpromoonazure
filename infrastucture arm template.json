@@ -64,6 +64,11 @@
                     ]
 
                 },
+                "dhcpOptions": {
+                    "dnsServers": [
+                        "10.230.10.10"
+                    ]
+                },
                 "subnets": [
                     {
                         "name": "td-subnet",
