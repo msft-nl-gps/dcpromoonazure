@@ -28,17 +28,21 @@ Install-ADDSForest `
 
 
 ##################################
-#after reboot
+#after rboot
 $site_name = "ts1"
 Import-Module ActiveDirectory
 New-ADReplicationSite -Name $site_name
-Set-ADReplicationSiteLink -Identity "DEFAULTIPSITELINK" -SitesIncluded @{Add="$site_name"}
+Set-ADReplicationSiteLink -Identity "DEFAULTIPSITELINK" -SitesIncluded @{​​​​​Add="$site_name"}​​​​​
 New-ADUser -Name "tdadmin2" -SamAccountName "tdadmin2" -UserPrincipalName "tdadmin2@tst.loc" -Enabled $true -AccountPassword (ConvertTo-SecureString "P@ssw0rd1234!" -AsPlainText -Force)
 Add-ADGroupMember -Identity "Enterprise Admins" -Members "tdadmin2"
+
+Restart-Computer # this is not required, but it doesn't work without it.
 
 #################################
 
 # can ping tst.loc at this point
+
+ping tst.loc
  
 $root_domain = "tst.loc"
 $site_name = "ts1"
@@ -73,5 +77,7 @@ Install-ADDSDomain `
 -Confirm:$false `
 -Force:$true `
 -ErrorAction Stop
+
+Restart-Computer # this is required
 
 #############
