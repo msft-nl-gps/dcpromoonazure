@@ -1,0 +1,2067 @@
+
+Overview
+Severity	C
+Status	Open
+Support request ID	2305170050001261
+Created on	Wed, May 17, 2023, 11:04:54 AM
+Created by	Jan Hein Lever
+Contact method	Email: janheinl@topdesk.com
+Support plan	Standard
+Advanced diagnostic information	Permission granted
+View All
+Give Feedback
+
+Tell us about your experience with support request overview
+janheinl@topdesk.com
+Thu, Aug 3, 2023, 12:54:16 PM
+Hi Roberto,
+
+Thanks for the update, hopefully AzureNet can have a look soon.
+
+Some extra information again: following the observed behaviour in the separate Azure tenant, I adjusted the "Hub routing preference" to "VPN" in our acceptance and production tenants earlier this week, but unfortunately child domain creation still fails in those tenants after that change. Therefore, it seems there are other factors involved as well, but it still seems likely that the problems do somehow relate to the Azure WAN and its network implications (or possibly a bug).
+
+Kind regards,
+Jan Hein Lever
+
+TOPdesk SaaS
+From: Roberto G <support@mail.support.microsoft.com>
+Sent: Thursday, August 3, 2023 11:55 AM
+To: Jan Hein Lever <janheinl@topdesk.com>; supportmail@microsoft.com <supportmail@microsoft.com>
+Cc: v-rcastelloo@microsoft.com <v-rcastelloo@microsoft.com>
+Subject: RE: [EXTERNAL] Re: Problem creating Windows AD ... - TrackingID#2305170050001261
+ 
+
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+
+Good morning Jan, 
+ 
+I'm waiting for an update from the AzureNet side so I can connect you with them, but I have not received anything from their side. Hopefully they will get to the case by end of day today or tomorrow, I cannot make any promises. I've also made a note so that they see the your troubleshooting you've done from the email you've sent me. 
+ 
+Thank you for your patience. 
+ 
+Best regards,  
+ 
+ 
+Please always "Reply All" and include “support@mail.support.microsoft.com” in your reply if you want your response added to the case automatically. Also keep my email in CC at all times “v-rcastelloo@microsoft.com”
+ 
+Roberto G. Castello Ortiz 
+EMEA Windows Platforms Support Specialist
+
+Microsoft Logo
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-rcastelloo@Microsoft.com
+
+If you have any feedback about my work, please let either myself or my managers know at:
+CNX_LaC_TMs@microsoft.com
+
+Microsoft Professional Support - FAQ: https://learn.microsoft.com/services-hub/sfbus/support-for-business/professional-support-faqs
+Remote Assistance Support: https://support.microsoft.com/help
+Manage support requests: https://support.serviceshub.microsoft.com
+Microsoft Partner Support: https://partner.microsoft.com/support/partnersupport
+ 
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+------------------- Original Message -------------------
+From: janheinl@topdesk.com;
+Received: Fri Jul 28 2023 17:07:40 GMT+0200 (Central European Summer Time)
+To: supportmail@microsoft.com;
+Cc: v-rcastelloo@microsoft.com;
+Subject: [EXTERNAL] Re: Problem creating Windows AD chil... - TrackingID#2305170050001261
+
+Hi Roberto,
+ 
+I've succeeded in breaking the child domain creation in the tenant mentioned in my mail from Tuesday where child domain creation was working properly.
+ 
+The Windows child domain creation breaks specifically with a "Virtual WAN" resource added to the tenant which has a "Virtual HUB" resource within it which has its "Hub routing preference" set to "ExpressRoute" (through "Edit virtual hub"). When I set the "Hub routing preference" for this "Virtual HUB" back to "VPN", the Windows child domain creation works without issues again.
+ 
+Since we have been making the shift to Azure WAN on our acceptance tenant in April with the "Hub routing preference" set to "ExpressRoute", it seems very likely that this is what is causing the problems in our acceptance and production tenants as well.
+ 
+This seems like an Azure bug to me, since there is actually no relation between the VNET the domain controllers are in and the deployed Azure WAN resource for this reproduction. I would very much like to hear from the networking team if this is indeed the case and how we somehow can best work around this (or possibly make networking adjustments). I will also check with my colleagues next week what we can do to not use the "ExpressRoute" option.
+ 
+Hope to hear from you or the Azure Networking team next week!
+ 
+Kind regards,
+Jan Hein Lever
+ 
+ 
+ 
+From: Jan Hein Lever <janheinl@topdesk.com>
+Sent: Friday, July 28, 2023 3:45 PM
+To: Roberto G <support@mail.support.microsoft.com>
+Cc: v-rcastelloo@microsoft.com <v-rcastelloo@microsoft.com>
+Subject: Re: Problem creating Windows AD child domain - TrackingID#2305170050001261
+ 
+Hi Roberto,
+ 
+Thanks for the update, I'll be very flexible next week since this issue has very high priority and I can plan in time any time during work hours next week, except for Wednesday when I have a day off.
+ 
+Please let me know when we can schedule a call any time other than Wedndesday.
+ 
+Kind regards,
+Jan Hein Lever
+ 
+From: Roberto G <support@mail.support.microsoft.com>
+Sent: Friday, July 28, 2023 3:36 PM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Cc: v-rcastelloo@microsoft.com <v-rcastelloo@microsoft.com>
+Subject: Problem creating Windows AD child domain - TrackingID#2305170050001261
+ 
+
+ 
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+ 
+
+ 
+Good afternoon Jan, 
+ 
+I just wanted to give you an update of what is happening. After speaking with the collaborating Azure net agent they need to find a engineer that deals with what you had previously mentioned an engineer with that is an expert in connectivity between Azure and On-Premise. We are working on getting them so that you can receive the best possible support. 
+ 
+Also, as I asked on Tuesday, can you provide me the best times you can meet so that once, I get the message from the engineer. I have that info and we can schedule a call as soon as possible. 
+ 
+Thank you again for your patience. 
+My best, 
+ 
+Please always "Reply All" and include “support@mail.support.microsoft.com” in your reply if you want your response added to the case automatically. Also keep my email in CC at all times “v-rcastelloo@microsoft.com”
+ 
+Roberto G. Castello Ortiz 
+EMEA Windows Platforms Support Specialist
+
+Microsoft Logo
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-rcastelloo@Microsoft.com
+
+If you have any feedback about my work, please let either myself or my managers know at:
+CNX_LaC_TMs@microsoft.com
+
+Microsoft Professional Support - FAQ: https://learn.microsoft.com/services-hub/sfbus/support-for-business/professional-support-faqs
+Remote Assistance Support: https://support.microsoft.com/help
+Manage support requests: https://support.serviceshub.microsoft.com
+Microsoft Partner Support: https://partner.microsoft.com/support/partnersupport
+ 
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+support@mail.support.microsoft.com
+Thu, Aug 3, 2023, 10:49:57 AM
+Good morning Jan, 
+ 
+I'm waiting for an update from the AzureNet side so I can connect you with them, but I have not received anything from their side. Hopefully they will get to the case by end of day today or tomorrow, I cannot make any promises. I've also made a note so that they see the your troubleshooting you've done from the email you've sent me. 
+ 
+Thank you for your patience. 
+ 
+Best regards,  
+ 
+ 
+Please always "Reply All" and include “support@mail.support.microsoft.com” in your reply if you want your response added to the case automatically. Also keep my email in CC at all times “v-rcastelloo@microsoft.com”
+ 
+Roberto G. Castello Ortiz 
+EMEA Windows Platforms Support Specialist
+
+Microsoft Logo
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-rcastelloo@Microsoft.com
+
+If you have any feedback about my work, please let either myself or my managers know at:
+CNX_LaC_TMs@microsoft.com
+
+Microsoft Professional Support - FAQ: https://learn.microsoft.com/services-hub/sfbus/support-for-business/professional-support-faqs
+Remote Assistance Support: https://support.microsoft.com/help
+Manage support requests: https://support.serviceshub.microsoft.com
+Microsoft Partner Support: https://partner.microsoft.com/support/partnersupport
+ 
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+------------------- Original Message -------------------
+From: janheinl@topdesk.com;
+Received: Fri Jul 28 2023 17:07:40 GMT+0200 (Central European Summer Time)
+To: supportmail@microsoft.com;
+Cc: v-rcastelloo@microsoft.com;
+Subject: [EXTERNAL] Re: Problem creating Windows AD chil... - TrackingID#2305170050001261
+
+Hi Roberto,
+ 
+I've succeeded in breaking the child domain creation in the tenant mentioned in my mail from Tuesday where child domain creation was working properly.
+ 
+The Windows child domain creation breaks specifically with a "Virtual WAN" resource added to the tenant which has a "Virtual HUB" resource within it which has its "Hub routing preference" set to "ExpressRoute" (through "Edit virtual hub"). When I set the "Hub routing preference" for this "Virtual HUB" back to "VPN", the Windows child domain creation works without issues again.
+ 
+Since we have been making the shift to Azure WAN on our acceptance tenant in April with the "Hub routing preference" set to "ExpressRoute", it seems very likely that this is what is causing the problems in our acceptance and production tenants as well.
+ 
+This seems like an Azure bug to me, since there is actually no relation between the VNET the domain controllers are in and the deployed Azure WAN resource for this reproduction. I would very much like to hear from the networking team if this is indeed the case and how we somehow can best work around this (or possibly make networking adjustments). I will also check with my colleagues next week what we can do to not use the "ExpressRoute" option.
+ 
+Hope to hear from you or the Azure Networking team next week!
+ 
+Kind regards,
+Jan Hein Lever
+ 
+ 
+ 
+From: Jan Hein Lever <janheinl@topdesk.com>
+Sent: Friday, July 28, 2023 3:45 PM
+To: Roberto G <support@mail.support.microsoft.com>
+Cc: v-rcastelloo@microsoft.com <v-rcastelloo@microsoft.com>
+Subject: Re: Problem creating Windows AD child domain - TrackingID#2305170050001261
+ 
+Hi Roberto,
+ 
+Thanks for the update, I'll be very flexible next week since this issue has very high priority and I can plan in time any time during work hours next week, except for Wednesday when I have a day off.
+ 
+Please let me know when we can schedule a call any time other than Wedndesday.
+ 
+Kind regards,
+Jan Hein Lever
+ 
+From: Roberto G <support@mail.support.microsoft.com>
+Sent: Friday, July 28, 2023 3:36 PM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Cc: v-rcastelloo@microsoft.com <v-rcastelloo@microsoft.com>
+Subject: Problem creating Windows AD child domain - TrackingID#2305170050001261
+ 
+
+ 
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+ 
+
+ 
+Good afternoon Jan, 
+ 
+I just wanted to give you an update of what is happening. After speaking with the collaborating Azure net agent they need to find a engineer that deals with what you had previously mentioned an engineer with that is an expert in connectivity between Azure and On-Premise. We are working on getting them so that you can receive the best possible support. 
+ 
+Also, as I asked on Tuesday, can you provide me the best times you can meet so that once, I get the message from the engineer. I have that info and we can schedule a call as soon as possible. 
+ 
+Thank you again for your patience. 
+My best, 
+ 
+Please always "Reply All" and include “support@mail.support.microsoft.com” in your reply if you want your response added to the case automatically. Also keep my email in CC at all times “v-rcastelloo@microsoft.com”
+ 
+Roberto G. Castello Ortiz 
+EMEA Windows Platforms Support Specialist
+
+Microsoft Logo
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-rcastelloo@Microsoft.com
+
+If you have any feedback about my work, please let either myself or my managers know at:
+CNX_LaC_TMs@microsoft.com
+
+Microsoft Professional Support - FAQ: https://learn.microsoft.com/services-hub/sfbus/support-for-business/professional-support-faqs
+Remote Assistance Support: https://support.microsoft.com/help
+Manage support requests: https://support.serviceshub.microsoft.com
+Microsoft Partner Support: https://partner.microsoft.com/support/partnersupport
+ 
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+janheinl@topdesk.com
+Fri, Jul 28, 2023, 5:07:38 PM
+Hi Roberto,
+
+I've succeeded in breaking the child domain creation in the tenant mentioned in my mail from Tuesday where child domain creation was working properly.
+
+The Windows child domain creation breaks specifically with a "Virtual WAN" resource added to the tenant which has a "Virtual HUB" resource within it which has its "Hub routing preference" set to "ExpressRoute" (through "Edit virtual hub"). When I set the "Hub routing preference" for this "Virtual HUB" back to "VPN", the Windows child domain creation works without issues again.
+
+Since we have been making the shift to Azure WAN on our acceptance tenant in April with the "Hub routing preference" set to "ExpressRoute", it seems very likely that this is what is causing the problems in our acceptance and production tenants as well.
+
+This seems like an Azure bug to me, since there is actually no relation between the VNET the domain controllers are in and the deployed Azure WAN resource for this reproduction. I would very much like to hear from the networking team if this is indeed the case and how we somehow can best work around this (or possibly make networking adjustments). I will also check with my colleagues next week what we can do to not use the "ExpressRoute" option.
+
+Hope to hear from you or the Azure Networking team next week!
+
+Kind regards,
+Jan Hein Lever
+
+
+From: Jan Hein Lever <janheinl@topdesk.com>
+Sent: Friday, July 28, 2023 3:45 PM
+To: Roberto G <support@mail.support.microsoft.com>
+Cc: v-rcastelloo@microsoft.com <v-rcastelloo@microsoft.com>
+Subject: Re: Problem creating Windows AD child domain - TrackingID#2305170050001261
+ 
+Hi Roberto,
+
+Thanks for the update, I'll be very flexible next week since this issue has very high priority and I can plan in time any time during work hours next week, except for Wednesday when I have a day off.
+
+Please let me know when we can schedule a call any time other than Wedndesday.
+
+Kind regards,
+Jan Hein Lever
+From: Roberto G <support@mail.support.microsoft.com>
+Sent: Friday, July 28, 2023 3:36 PM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Cc: v-rcastelloo@microsoft.com <v-rcastelloo@microsoft.com>
+Subject: Problem creating Windows AD child domain - TrackingID#2305170050001261
+ 
+
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+
+Good afternoon Jan, 
+ 
+I just wanted to give you an update of what is happening. After speaking with the collaborating Azure net agent they need to find a engineer that deals with what you had previously mentioned an engineer with that is an expert in connectivity between Azure and On-Premise. We are working on getting them so that you can receive the best possible support. 
+ 
+Also, as I asked on Tuesday, can you provide me the best times you can meet so that once, I get the message from the engineer. I have that info and we can schedule a call as soon as possible. 
+ 
+Thank you again for your patience. 
+My best, 
+ 
+Please always "Reply All" and include “support@mail.support.microsoft.com” in your reply if you want your response added to the case automatically. Also keep my email in CC at all times “v-rcastelloo@microsoft.com”
+ 
+Roberto G. Castello Ortiz 
+EMEA Windows Platforms Support Specialist
+
+Microsoft Logo
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-rcastelloo@Microsoft.com
+
+If you have any feedback about my work, please let either myself or my managers know at:
+CNX_LaC_TMs@microsoft.com
+
+Microsoft Professional Support - FAQ: https://learn.microsoft.com/services-hub/sfbus/support-for-business/professional-support-faqs
+Remote Assistance Support: https://support.microsoft.com/help
+Manage support requests: https://support.serviceshub.microsoft.com
+Microsoft Partner Support: https://partner.microsoft.com/support/partnersupport
+ 
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+janheinl@topdesk.com
+Fri, Jul 28, 2023, 3:46:01 PM
+Hi Roberto,
+
+Thanks for the update, I'll be very flexible next week since this issue has very high priority and I can plan in time any time during work hours next week, except for Wednesday when I have a day off.
+
+Please let me know when we can schedule a call any time other than Wedndesday.
+
+Kind regards,
+Jan Hein Lever
+From: Roberto G <support@mail.support.microsoft.com>
+Sent: Friday, July 28, 2023 3:36 PM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Cc: v-rcastelloo@microsoft.com <v-rcastelloo@microsoft.com>
+Subject: Problem creating Windows AD child domain - TrackingID#2305170050001261
+ 
+
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+
+Good afternoon Jan, 
+ 
+I just wanted to give you an update of what is happening. After speaking with the collaborating Azure net agent they need to find a engineer that deals with what you had previously mentioned an engineer with that is an expert in connectivity between Azure and On-Premise. We are working on getting them so that you can receive the best possible support. 
+ 
+Also, as I asked on Tuesday, can you provide me the best times you can meet so that once, I get the message from the engineer. I have that info and we can schedule a call as soon as possible. 
+ 
+Thank you again for your patience. 
+My best, 
+ 
+Please always "Reply All" and include “support@mail.support.microsoft.com” in your reply if you want your response added to the case automatically. Also keep my email in CC at all times “v-rcastelloo@microsoft.com”
+ 
+Roberto G. Castello Ortiz 
+EMEA Windows Platforms Support Specialist
+
+Microsoft Logo
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-rcastelloo@Microsoft.com
+
+If you have any feedback about my work, please let either myself or my managers know at:
+CNX_LaC_TMs@microsoft.com
+
+Microsoft Professional Support - FAQ: https://learn.microsoft.com/services-hub/sfbus/support-for-business/professional-support-faqs
+Remote Assistance Support: https://support.microsoft.com/help
+Manage support requests: https://support.serviceshub.microsoft.com
+Microsoft Partner Support: https://partner.microsoft.com/support/partnersupport
+ 
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+support@mail.support.microsoft.com
+Fri, Jul 28, 2023, 3:36:44 PM
+Good afternoon Jan, 
+ 
+I just wanted to give you an update of what is happening. After speaking with the collaborating Azure net agent they need to find a engineer that deals with what you had previously mentioned an engineer with that is an expert in connectivity between Azure and On-Premise. We are working on getting them so that you can receive the best possible support. 
+ 
+Also, as I asked on Tuesday, can you provide me the best times you can meet so that once, I get the message from the engineer. I have that info and we can schedule a call as soon as possible. 
+ 
+Thank you again for your patience. 
+My best, 
+ 
+Please always "Reply All" and include “support@mail.support.microsoft.com” in your reply if you want your response added to the case automatically. Also keep my email in CC at all times “v-rcastelloo@microsoft.com”
+ 
+Roberto G. Castello Ortiz 
+EMEA Windows Platforms Support Specialist
+
+Microsoft Logo
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-rcastelloo@Microsoft.com
+
+If you have any feedback about my work, please let either myself or my managers know at:
+CNX_LaC_TMs@microsoft.com
+
+Microsoft Professional Support - FAQ: https://learn.microsoft.com/services-hub/sfbus/support-for-business/professional-support-faqs
+Remote Assistance Support: https://support.microsoft.com/help
+Manage support requests: https://support.serviceshub.microsoft.com
+Microsoft Partner Support: https://partner.microsoft.com/support/partnersupport
+ 
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+janheinl@topdesk.com
+Tue, Jul 25, 2023, 7:31:55 PM
+Hi Roberto,
+
+Thanks for the update! I'll be quite flexible this Thursday or Friday at Western European times (only Thursday from 13:00 to 14:00 does not fit), please let me know if they have time on those days.
+
+Some extra information:
+
+I can reproduce the problem in both our acceptance and production tenants:
+"TOPdesk SaaS ACC", tenant/directory id: d87176a2-fbd8-4a8d-96ec-a0b4d0222299
+"TOPdesk SaaS PROD", tenant/directory id: 473807c6-40e3-4b84-b3c3-49b847a3bbcb
+
+But not in this tenant:
+"TOPdesksaaspoc", tenant/directory id: 473807c6-40e3-4b84-b3c3-49b847a3bbcb
+
+I've been suspecting this may somehow relate to networking changes we made moving to Azure WAN and VPN sites within that WAN for the first two mentioned tenants, but I cannot directly relate the time of those changes to the appearance of the problem.
+
+I've tried deploying a WAN and hub in the last tenant "TOPdesksaaspoc" today (did not have time to try and replicate the whole situation with hubs and vpns), but I could still create a root/child AD domain as mentioned without problems there.
+
+Hope this may already give some pointers for the AzureNet team.
+
+Kind regards,
+Jan Hein Lever
+From: Roberto G <support@mail.support.microsoft.com>
+Sent: Tuesday, July 25, 2023 5:00 PM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Cc: v-rcastelloo@microsoft.com <v-rcastelloo@microsoft.com>
+Subject: Problem creating Windows AD child domain - TrackingID#2305170050001261
+ 
+
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+
+Good afternoon Jan, 
+
+I'm in contact with an engineer from AzureNet, and I want to be ready for when they ask for your availability to connect with you to troubleshoot further. 
+ 
+Please let me know. 
+ 
+Thank you. 
+Best regards,
+ 
+Please always "Reply All" and include “support@mail.support.microsoft.com” in your reply if you want your response added to the case automatically. Also keep my email in CC at all times “v-rcastelloo@microsoft.com”
+ 
+Roberto G. Castello Ortiz 
+EMEA Windows Platforms Support Specialist
+
+Microsoft Logo
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-rcastelloo@Microsoft.com
+
+If you have any feedback about my work, please let either myself or my managers know at:
+CNX_LaC_TMs@microsoft.com
+
+Microsoft Professional Support - FAQ: https://learn.microsoft.com/services-hub/sfbus/support-for-business/professional-support-faqs
+Remote Assistance Support: https://support.microsoft.com/help
+Manage support requests: https://support.serviceshub.microsoft.com
+Microsoft Partner Support: https://partner.microsoft.com/support/partnersupport
+ 
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+support@mail.support.microsoft.com
+Tue, Jul 25, 2023, 5:00:36 PM
+Good afternoon Jan, 
+
+I'm in contact with an engineer from AzureNet, and I want to be ready for when they ask for your availability to connect with you to troubleshoot further. 
+ 
+Please let me know. 
+ 
+Thank you. 
+Best regards,
+ 
+Please always "Reply All" and include “support@mail.support.microsoft.com” in your reply if you want your response added to the case automatically. Also keep my email in CC at all times “v-rcastelloo@microsoft.com”
+ 
+Roberto G. Castello Ortiz 
+EMEA Windows Platforms Support Specialist
+
+Microsoft Logo
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-rcastelloo@Microsoft.com
+
+If you have any feedback about my work, please let either myself or my managers know at:
+CNX_LaC_TMs@microsoft.com
+
+Microsoft Professional Support - FAQ: https://learn.microsoft.com/services-hub/sfbus/support-for-business/professional-support-faqs
+Remote Assistance Support: https://support.microsoft.com/help
+Manage support requests: https://support.serviceshub.microsoft.com
+Microsoft Partner Support: https://partner.microsoft.com/support/partnersupport
+ 
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+v-rcastelloo@microsoft.com
+Mon, Jul 24, 2023, 4:52:56 PM
+
+Hello Rajani Bhingare,
+
+ 
+
+Please look at note left on the case copied and pasted questions and answered them.
+
+ 
+
+Thanks in advance.
+
+
+Best regards,
+
+ 
+
+Please always "Reply All" and include “support@mail.support.microsoft.com” in your reply if you want your response added to the case automatically. Also keep my email in CC at all times “v-rcastelloo@microsoft.com”
+
+ 
+
+ 
+
+Roberto G. Castelló Ortiz
+
+EMEA Windows Platforms Support Specialist
+
+ 
+
+Microsoft Logo
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-rcastelloo@Microsoft.com
+
+ 
+
+If you have any feedback about my work, please let either myself or my managers know at:
+
+CNX_LaC_TMs@microsoft.com
+
+ 
+
+Microsoft Professional Support - FAQ: https://learn.microsoft.com/services-hub/sfbus/support-for-business/professional-support-faqs
+
+Remote Assistance Support: https://support.microsoft.com/help
+
+Manage support requests: https://support.serviceshub.microsoft.com
+
+Microsoft Partner Support: https://partner.microsoft.com/support/partnersupport
+
+ 
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+
+ 
+
+From: Rajani B <support@mail.support.microsoft.com>
+Sent: Monday, July 24, 2023 3:22 PM
+To: Roberto Giovanie Castello Ortiz (Convergys International Europe) <v-rcastelloo@microsoft.com>
+Cc: Rajani Bhingare (MINDTREE LIMITED) <v-rbhingare@microsoft.com>
+Subject: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+
+Hello Roberto,
+ 
+Hope you are doing good.
+
+ 
+
+Could you please help me with the below information:
+
+1) What is the end goal of the case?
+
+2)Please share error screenshot?
+
+3) Please share if you are following any documnet?
+
+4) From when you are facing this issue?
+
+5)Was this working previously?
+
+6)Please share with us azure resource id/Name along with resource group for which you are facing the issue.'
+
+7)What is your working hours along with timezone to align main case engineer, who will work with you till case resolution?
+
+ 8)If it is RDP issue, needed below details:
+
+A)Any customized port for RDP instead of 3389?
+
+B)Are you able to access any other VM's in the same network?
+
+C)How are you trying to connect ? Is it via Public IP or Private IP?
+
+D)Have you installed any antivirus on the VM?
+
+E)Did you try to connect via a different user/local user?
+
+F)Did you try to RDP from a different machine?
+
+Looking forward to your reply.
+
+Best regards,
+Rajani Bhingare (MINDTREE LIMITED)
+v-rbhingare@microsoft.com
+Microsoft Azure IaaS Technical Support
+Customer Service and Support
+Working Hours: Mon – Fri 1:00  -10:30 IST
+If you need Support outside of my working hours, please send email to azurebu@microsoft.com with your case number, and availability.
+Manager: Sandhya middha v-smiddha@microsoft.com
+
+Microsoft Azure | Azure Status | Support Plans | Create a Case | Privacy Policy
+
+ 
+janheinl@topdesk.com
+Fri, Jul 21, 2023, 5:07:45 PM
+Hi Roberto and Roy,
+
+As already discussed with Roy earlier today, I found a completely separate company Azure tenant and tried to reproduce the situation there in a new VNET with the same steps as mentioned in my mail from the 4th of July but I actually could not reproduce the problem there and the child domain was created without issues!
+
+It seems a separate VNET in our acceptance tenant was not enough isolation and the problem has to be related to some setting/networking for our tenant (and most likely our production tenant).
+
+As Roy mentioned we can for now probably rule out that this is Windows related, but we would definitely like to look into what is causing this with the Azure Networking team.
+
+I will have a deeper look into possibly related changes on our end (earlier I was not able to directly link any changes) and hope the Networking team can give some further suggestions.
+
+Kind regards,
+Jan Hein Lever
+From: Jan Hein Lever <janheinl@topdesk.com>
+Sent: Thursday, July 20, 2023 1:15 PM
+To: Roberto G <support@mail.support.microsoft.com>; supportmail@microsoft.com <supportmail@microsoft.com>
+Cc: v-rcastelloo@microsoft.com <v-rcastelloo@microsoft.com>
+Subject: Re: [EXTERNAL] Re: Problem creating Windows AD ... - TrackingID#2305170050001261
+ 
+Hi Roberto,
+
+I have added the dcpromo log from my attempt earlier at the provided link.
+
+Kind regards,
+Jan Hein Lever
+From: Roberto G <support@mail.support.microsoft.com>
+Sent: Thursday, July 20, 2023 11:05 AM
+To: Jan Hein Lever <janheinl@topdesk.com>; supportmail@microsoft.com <supportmail@microsoft.com>
+Cc: v-rcastelloo@microsoft.com <v-rcastelloo@microsoft.com>
+Subject: RE: [EXTERNAL] Re: Problem creating Windows AD ... - TrackingID#2305170050001261
+ 
+
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+
+Good morning Jan, 
+ 
+Can you provide the dcpromo.logs for this instance? You can get them from the following location %SystemRoot%\Debug\DCPromo.log. 
+ 
+And upload here: 
+ 
+File Transfer - Case 2305170050001261
+ 
+Thanks in advance. 
+ 
+Please always "Reply All" and include “support@mail.support.microsoft.com” in your reply if you want your response added to the case automatically. Also keep my email in CC at all times “v-rcastelloo@microsoft.com”
+ 
+Roberto G. Castello Ortiz 
+EMEA Windows Platforms Support Specialist
+
+Microsoft Logo
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-rcastelloo@Microsoft.com
+
+If you have any feedback about my work, please let either myself or my managers know at:
+CNX_LaC_TMs@microsoft.com
+
+Microsoft Professional Support - FAQ: https://learn.microsoft.com/services-hub/sfbus/support-for-business/professional-support-faqs
+Remote Assistance Support: https://support.microsoft.com/help
+Manage support requests: https://support.serviceshub.microsoft.com
+Microsoft Partner Support: https://partner.microsoft.com/support/partnersupport
+ 
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+------------------- Original Message -------------------
+From: janheinl@topdesk.com;
+Received: Thu Jul 20 2023 10:09:38 GMT+0200 (Central European Summer Time)
+To: supportmail@microsoft.com;
+Cc: v-rcastelloo@microsoft.com;
+Subject: [EXTERNAL] Re: Problem creating Windows AD chil... - TrackingID#2305170050001261
+
+Hi Roberto,
+ 
+Thanks for the update! I just gave it another go on standard Azure Windows Server 2022 images by clicking through the AD DS configuration wizard with the credentials set as "tst.loc\henk"; unfortunately it gives the same result and I still get the "The RPC server is unavailable" error in the interface.
+ 
+Kind regards,
+Jan Hein Lever
+ 
+From: Roberto G <support@mail.support.microsoft.com>
+Sent: Wednesday, July 19, 2023 10:09 AM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Cc: v-rcastelloo@microsoft.com <v-rcastelloo@microsoft.com>
+Subject: Problem creating Windows AD child domain - TrackingID#2305170050001261
+ 
+
+ 
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+ 
+
+ 
+Good morning Jan, 
+ 
+I am still waiting for a reply for your request however as we are waiting we can try to troubleshoot further. We were analyzing the GUI method you described and wondered if you use the "tst.loc\henk" as the credential instead and not use the UPN henk@tst.loc. And just to make sure that this user account has been granted the "enable computer and user accounts to be trusted for delagation" user right. 
+ 
+Please let me know how this goes. 
+ 
+Thank you again Jan for your patience on this case. I am trying my best to provide you a prompt resolution. 
+ 
+Best regards, 
+ 
+Please always "Reply All" and include “support@mail.support.microsoft.com” in your reply if you want your response added to the case automatically. Also keep my email in CC at all times “v-rcastelloo@microsoft.com”
+ 
+Roberto G. Castello Ortiz 
+EMEA Windows Platforms Support Specialist
+
+Microsoft Logo
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-rcastelloo@Microsoft.com
+
+If you have any feedback about my work, please let either myself or my managers know at:
+CNX_LaC_TMs@microsoft.com
+
+Microsoft Professional Support - FAQ: https://learn.microsoft.com/services-hub/sfbus/support-for-business/professional-support-faqs
+Remote Assistance Support: https://support.microsoft.com/help
+Manage support requests: https://support.serviceshub.microsoft.com
+Microsoft Partner Support: https://partner.microsoft.com/support/partnersupport
+ 
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+janheinl@topdesk.com
+Thu, Jul 20, 2023, 1:15:27 PM
+Hi Roberto,
+
+I have added the dcpromo log from my attempt earlier at the provided link.
+
+Kind regards,
+Jan Hein Lever
+From: Roberto G <support@mail.support.microsoft.com>
+Sent: Thursday, July 20, 2023 11:05 AM
+To: Jan Hein Lever <janheinl@topdesk.com>; supportmail@microsoft.com <supportmail@microsoft.com>
+Cc: v-rcastelloo@microsoft.com <v-rcastelloo@microsoft.com>
+Subject: RE: [EXTERNAL] Re: Problem creating Windows AD ... - TrackingID#2305170050001261
+ 
+
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+
+Good morning Jan, 
+ 
+Can you provide the dcpromo.logs for this instance? You can get them from the following location %SystemRoot%\Debug\DCPromo.log. 
+ 
+And upload here: 
+ 
+File Transfer - Case 2305170050001261
+ 
+Thanks in advance. 
+ 
+Please always "Reply All" and include “support@mail.support.microsoft.com” in your reply if you want your response added to the case automatically. Also keep my email in CC at all times “v-rcastelloo@microsoft.com”
+ 
+Roberto G. Castello Ortiz 
+EMEA Windows Platforms Support Specialist
+
+Microsoft Logo
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-rcastelloo@Microsoft.com
+
+If you have any feedback about my work, please let either myself or my managers know at:
+CNX_LaC_TMs@microsoft.com
+
+Microsoft Professional Support - FAQ: https://learn.microsoft.com/services-hub/sfbus/support-for-business/professional-support-faqs
+Remote Assistance Support: https://support.microsoft.com/help
+Manage support requests: https://support.serviceshub.microsoft.com
+Microsoft Partner Support: https://partner.microsoft.com/support/partnersupport
+ 
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+------------------- Original Message -------------------
+From: janheinl@topdesk.com;
+Received: Thu Jul 20 2023 10:09:38 GMT+0200 (Central European Summer Time)
+To: supportmail@microsoft.com;
+Cc: v-rcastelloo@microsoft.com;
+Subject: [EXTERNAL] Re: Problem creating Windows AD chil... - TrackingID#2305170050001261
+
+Hi Roberto,
+ 
+Thanks for the update! I just gave it another go on standard Azure Windows Server 2022 images by clicking through the AD DS configuration wizard with the credentials set as "tst.loc\henk"; unfortunately it gives the same result and I still get the "The RPC server is unavailable" error in the interface.
+ 
+Kind regards,
+Jan Hein Lever
+ 
+From: Roberto G <support@mail.support.microsoft.com>
+Sent: Wednesday, July 19, 2023 10:09 AM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Cc: v-rcastelloo@microsoft.com <v-rcastelloo@microsoft.com>
+Subject: Problem creating Windows AD child domain - TrackingID#2305170050001261
+ 
+
+ 
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+ 
+
+ 
+Good morning Jan, 
+ 
+I am still waiting for a reply for your request however as we are waiting we can try to troubleshoot further. We were analyzing the GUI method you described and wondered if you use the "tst.loc\henk" as the credential instead and not use the UPN henk@tst.loc. And just to make sure that this user account has been granted the "enable computer and user accounts to be trusted for delagation" user right. 
+ 
+Please let me know how this goes. 
+ 
+Thank you again Jan for your patience on this case. I am trying my best to provide you a prompt resolution. 
+ 
+Best regards, 
+ 
+Please always "Reply All" and include “support@mail.support.microsoft.com” in your reply if you want your response added to the case automatically. Also keep my email in CC at all times “v-rcastelloo@microsoft.com”
+ 
+Roberto G. Castello Ortiz 
+EMEA Windows Platforms Support Specialist
+
+Microsoft Logo
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-rcastelloo@Microsoft.com
+
+If you have any feedback about my work, please let either myself or my managers know at:
+CNX_LaC_TMs@microsoft.com
+
+Microsoft Professional Support - FAQ: https://learn.microsoft.com/services-hub/sfbus/support-for-business/professional-support-faqs
+Remote Assistance Support: https://support.microsoft.com/help
+Manage support requests: https://support.serviceshub.microsoft.com
+Microsoft Partner Support: https://partner.microsoft.com/support/partnersupport
+ 
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+janheinl@topdesk.com
+Fri, Jun 9, 2023, 9:13:07 AM
+
+Hi Damian,
+
+Unfortunately your last messages from this ticket did not reach my mailbox for some reason and I missed them, also I was unexpectedly involved with other things yesterday.
+
+Would you have some time today?
+
+Kind regards,
+Jan Hein Lever
+
+v-damianm@microsoft.com
+Thu, Jun 8, 2023, 10:12:17 AM
+
+Hello Jan,
+
+ 
+
+I hope you are doing fine!
+
+ 
+
+I would appreciate if you can confirm to me that you will be available today, also if you can share a teams meeting with me, it would be really helpful.
+
+ 
+
+Kind regards,
+
+ 
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+
+ 
+
+From: Damian Martinez Lojo (CONVERGYS CORPORATION)
+Sent: Wednesday, June 7, 2023 10:51 AM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Cc: Microsoft Support <supportmail@microsoft.com>
+Subject: RE: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+
+Hello Jan,
+
+ 
+
+I am sending you this mail to add on the thread the Microsoft Support account, please next time use the “Reply All” button to don’t miss your emails on the case thread.
+
+ 
+
+Thanks in advance,
+
+ 
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+
+ 
+
+From: Damian Martinez Lojo (CONVERGYS CORPORATION)
+Sent: Wednesday, June 7, 2023 10:39 AM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Subject: RE: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+
+Hello Jan,
+
+ 
+
+I hope you are doing fine!
+
+ 
+
+I would appreciate if you can share with me a teams meeting for tomorrow at the time that works better for you.
+
+ 
+
+Kind regards,
+
+ 
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+
+ 
+
+From: Jan Hein Lever <janheinl@topdesk.com>
+Sent: Tuesday, June 6, 2023 1:29 PM
+To: Damian Martinez Lojo (CONVERGYS CORPORATION) <v-damianm@microsoft.com>
+Subject: [EXTERNAL] Re: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+
+Hi Damián,
+
+ 
+
+That is definitely possible, would it be possible to meet on Microsoft Teams?
+
+ 
+
+I think you should be able to contact me through j.lever@topdesk.com or janheinl@topdesk.com on Teams.
+
+ 
+
+I am available today for the coming three hours today and then again on Thursday during Western European office hours.
+
+ 
+
+Kind regards,
+
+Jan Hein
+
+From: Damian Martinez Lojo (CONVERGYS CORPORATION) <v-damianm@microsoft.com>
+Sent: Tuesday, June 6, 2023 11:57 AM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Subject: RE: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+
+ 
+
+Hello Jan,
+
+ 
+
+I hope you are doing fine!
+
+ 
+
+I was checking the information we have related with this issue, it could be possible to have a remote session together and you can show me the issue? I think it would be useful and we can step forward with that.
+
+ 
+
+Kind regards,
+
+ 
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+
+ 
+
+From: Damian Martinez Lojo (CONVERGYS CORPORATION)
+Sent: Friday, June 2, 2023 4:03 PM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Subject: RE: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+
+Hello Jan,
+
+ 
+
+I hope you are doing fine and you can have a nice weekend!
+
+ 
+
+Sorry for the delayed response, I am checking your case internally and I will try to give you an update at the start of the next week.
+
+ 
+
+Kind regards,
+
+ 
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+
+ 
+
+From: Jan Hein Lever <janheinl@topdesk.com>
+Sent: Tuesday, May 30, 2023 5:14 PM
+To: Damian Martinez Lojo (CONVERGYS CORPORATION) <v-damianm@microsoft.com>
+Subject: [EXTERNAL] Re: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+	
+
+You don't often get email from janheinl@topdesk.com. Learn why this is important
+	
+
+Hi Damián,
+
+ 
+
+Thanks for the update!
+
+ 
+
+To be clear since the 24th of April I cannot get this to work on Azure in any way; when I click in the Azure Portal to create two VM's in the same subnet and then click within those VMs with the server manager to create a root domain on one VM and a child domain to that root domain on another VM I get the exact same error. In this case I used the standard Azure Windows 2022 images as well.
+
+ 
+
+Kind regards,
+
+Jan Hein Lever
+
+From: Damian Martinez Lojo (CONVERGYS CORPORATION) <v-damianm@microsoft.com>
+Sent: Tuesday, May 30, 2023 5:01 PM
+To: Jan Hein Lever <janheinl@topdesk.com>; Microsoft Support <supportmail@microsoft.com>
+Subject: RE: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+
+ 
+
+Hello Jan,
+
+ 
+
+I hope you are doing fine!
+
+ 
+
+I missed the last mail from the Azure portal, thanks a lot for sharing it again. I will take a look at the logs you uploaded and try to give you an update as soon as possible.
+
+ 
+
+Related to the part of the mail where you told us that the standard images work fine, can you confirm to me if you ran the same script and it worked? Or did you deployed this machines manually with a normal deploy method?
+
+ 
+
+Kind regards,
+
+ 
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+
+ 
+
+From: Jan Hein Lever <janheinl@topdesk.com>
+Sent: Tuesday, May 30, 2023 11:43 AM
+To: Microsoft Support <supportmail@microsoft.com>; Damian Martinez Lojo (CONVERGYS CORPORATION) <v-damianm@microsoft.com>
+Subject: [EXTERNAL] Re: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+	
+
+You don't often get email from janheinl@topdesk.com. Learn why this is important
+	
+
+Hi Damián,
+
+ 
+
+Last week I replied to your e-mail in the ticket in the Azure Portal, but I'm not entirely sure if that reply reached you as intended.
+
+ 
+
+The answers to your questions from my response in the Portal from last week:
+
+- The code mentioned was based on Microsoft documentation as for example found here: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/install-a-new-windows-server-2012-active-directory-child-or-tree-domain--level-200-
+
+- I can reproduce the exact same problem/error message also by clicking together both a root and a child domain on two VMs with the 'Active Directory Domain Services Configuration Wizard' from the Server Manager (as shown in the link above also) with the images and conditions described in my earlier messages in this incident
+
+- Our set-up worked fine before the 24th of April with the standard Windows Server 2016/2022 images
+
+ 
+
+I also added a zip-file with the dcpromo and dcpromoui logfiles to the Portal and some extra information for the error "The RPC server is unavailable" given:
+
+DCPromo.General.54,Microsoft.DirectoryServices.Deployment.PowerShell.Commands.InstallADDSDomainCommand
+
+Would you have an idea on how we can best progress with this issue?
+
+Kind regards,
+Jan Hein Lever
+
+TOPdesk SaaS
+
+From: Damian M <support@mail.support.microsoft.com>
+Sent: Thursday, May 25, 2023 12:21 PM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Cc: Damian Martinez Lojo <v-damianm@microsoft.com>
+Subject: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+
+ 
+
+Hello Jan,
+
+Thank you for contacting Microsoft Support. My name is Damián Martínez and I am the Support Professional who will be working with you on your support request. You can reach me using the contact information in my signature.
+
+You have requested to be contacted by email only. However, if you would like to discuss your issue by phone at any time please provide a phone number and let me know when is the best time to call.
+
+I understand that the issue is related to problems when you try to create and deploy a root domain and a child domain using an script. To begin working on your support request could you please provide the below information:
+ 
+
+    This script that you mentioned, can you explain me exactly from where you took it? I mean, it was given to you from the Microsoft team or it appears in any official documentation?
+    If you deploy manually with the same ISO’s the root and child domain it works properly? The issue only appears when you try to deploy everything using the script?
+    This script worked in any previous time?
+
+
+Kind regards,
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+
+ 
+v-damianm@microsoft.com
+Wed, Jun 7, 2023, 10:51:14 AM
+
+Hello Jan,
+
+ 
+
+I am sending you this mail to add on the thread the Microsoft Support account, please next time use the “Reply All” button to don’t miss your emails on the case thread.
+
+ 
+
+Thanks in advance,
+
+ 
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+
+ 
+
+From: Damian Martinez Lojo (CONVERGYS CORPORATION)
+Sent: Wednesday, June 7, 2023 10:39 AM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Subject: RE: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+
+Hello Jan,
+
+ 
+
+I hope you are doing fine!
+
+ 
+
+I would appreciate if you can share with me a teams meeting for tomorrow at the time that works better for you.
+
+ 
+
+Kind regards,
+
+ 
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+
+ 
+
+From: Jan Hein Lever <janheinl@topdesk.com>
+Sent: Tuesday, June 6, 2023 1:29 PM
+To: Damian Martinez Lojo (CONVERGYS CORPORATION) <v-damianm@microsoft.com>
+Subject: [EXTERNAL] Re: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+
+Hi Damián,
+
+ 
+
+That is definitely possible, would it be possible to meet on Microsoft Teams?
+
+ 
+
+I think you should be able to contact me through j.lever@topdesk.com or janheinl@topdesk.com on Teams.
+
+ 
+
+I am available today for the coming three hours today and then again on Thursday during Western European office hours.
+
+ 
+
+Kind regards,
+
+Jan Hein
+
+From: Damian Martinez Lojo (CONVERGYS CORPORATION) <v-damianm@microsoft.com>
+Sent: Tuesday, June 6, 2023 11:57 AM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Subject: RE: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+
+ 
+
+Hello Jan,
+
+ 
+
+I hope you are doing fine!
+
+ 
+
+I was checking the information we have related with this issue, it could be possible to have a remote session together and you can show me the issue? I think it would be useful and we can step forward with that.
+
+ 
+
+Kind regards,
+
+ 
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+
+ 
+
+From: Damian Martinez Lojo (CONVERGYS CORPORATION)
+Sent: Friday, June 2, 2023 4:03 PM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Subject: RE: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+
+Hello Jan,
+
+ 
+
+I hope you are doing fine and you can have a nice weekend!
+
+ 
+
+Sorry for the delayed response, I am checking your case internally and I will try to give you an update at the start of the next week.
+
+ 
+
+Kind regards,
+
+ 
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+
+ 
+
+From: Jan Hein Lever <janheinl@topdesk.com>
+Sent: Tuesday, May 30, 2023 5:14 PM
+To: Damian Martinez Lojo (CONVERGYS CORPORATION) <v-damianm@microsoft.com>
+Subject: [EXTERNAL] Re: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+	
+
+You don't often get email from janheinl@topdesk.com. Learn why this is important
+	
+
+Hi Damián,
+
+ 
+
+Thanks for the update!
+
+ 
+
+To be clear since the 24th of April I cannot get this to work on Azure in any way; when I click in the Azure Portal to create two VM's in the same subnet and then click within those VMs with the server manager to create a root domain on one VM and a child domain to that root domain on another VM I get the exact same error. In this case I used the standard Azure Windows 2022 images as well.
+
+ 
+
+Kind regards,
+
+Jan Hein Lever
+
+From: Damian Martinez Lojo (CONVERGYS CORPORATION) <v-damianm@microsoft.com>
+Sent: Tuesday, May 30, 2023 5:01 PM
+To: Jan Hein Lever <janheinl@topdesk.com>; Microsoft Support <supportmail@microsoft.com>
+Subject: RE: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+
+ 
+
+Hello Jan,
+
+ 
+
+I hope you are doing fine!
+
+ 
+
+I missed the last mail from the Azure portal, thanks a lot for sharing it again. I will take a look at the logs you uploaded and try to give you an update as soon as possible.
+
+ 
+
+Related to the part of the mail where you told us that the standard images work fine, can you confirm to me if you ran the same script and it worked? Or did you deployed this machines manually with a normal deploy method?
+
+ 
+
+Kind regards,
+
+ 
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+
+ 
+
+From: Jan Hein Lever <janheinl@topdesk.com>
+Sent: Tuesday, May 30, 2023 11:43 AM
+To: Microsoft Support <supportmail@microsoft.com>; Damian Martinez Lojo (CONVERGYS CORPORATION) <v-damianm@microsoft.com>
+Subject: [EXTERNAL] Re: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+	
+
+You don't often get email from janheinl@topdesk.com. Learn why this is important
+	
+
+Hi Damián,
+
+ 
+
+Last week I replied to your e-mail in the ticket in the Azure Portal, but I'm not entirely sure if that reply reached you as intended.
+
+ 
+
+The answers to your questions from my response in the Portal from last week:
+
+- The code mentioned was based on Microsoft documentation as for example found here: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/install-a-new-windows-server-2012-active-directory-child-or-tree-domain--level-200-
+
+- I can reproduce the exact same problem/error message also by clicking together both a root and a child domain on two VMs with the 'Active Directory Domain Services Configuration Wizard' from the Server Manager (as shown in the link above also) with the images and conditions described in my earlier messages in this incident
+
+- Our set-up worked fine before the 24th of April with the standard Windows Server 2016/2022 images
+
+ 
+
+I also added a zip-file with the dcpromo and dcpromoui logfiles to the Portal and some extra information for the error "The RPC server is unavailable" given:
+
+DCPromo.General.54,Microsoft.DirectoryServices.Deployment.PowerShell.Commands.InstallADDSDomainCommand
+
+Would you have an idea on how we can best progress with this issue?
+
+Kind regards,
+Jan Hein Lever
+
+TOPdesk SaaS
+
+From: Damian M <support@mail.support.microsoft.com>
+Sent: Thursday, May 25, 2023 12:21 PM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Cc: Damian Martinez Lojo <v-damianm@microsoft.com>
+Subject: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+
+ 
+
+Hello Jan,
+
+Thank you for contacting Microsoft Support. My name is Damián Martínez and I am the Support Professional who will be working with you on your support request. You can reach me using the contact information in my signature.
+
+You have requested to be contacted by email only. However, if you would like to discuss your issue by phone at any time please provide a phone number and let me know when is the best time to call.
+
+I understand that the issue is related to problems when you try to create and deploy a root domain and a child domain using an script. To begin working on your support request could you please provide the below information:
+ 
+
+    This script that you mentioned, can you explain me exactly from where you took it? I mean, it was given to you from the Microsoft team or it appears in any official documentation?
+    If you deploy manually with the same ISO’s the root and child domain it works properly? The issue only appears when you try to deploy everything using the script?
+    This script worked in any previous time?
+
+
+Kind regards,
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+
+ 
+janheinl@topdesk.com
+Fri, Jun 2, 2023, 10:34:24 AM
+
+Hi Support,
+
+Would you have an update on how we can best proceed with this?
+
+For the full context here in the Portal, I sent the following reply to the last question on Tuesday by mail:
+
+'To be clear since the 24th of April I cannot get this to work on Azure in any way; when I click in the Azure Portal to create two VM's in the same subnet and then click within those VMs with the server manager to create a root domain on one VM and a child domain to that root domain on another VM I get the exact same error. In this case I used the standard Azure Windows 2022 images as well.'
+
+Kind regards,
+Jan Hein Lever
+
+v-damianm@microsoft.com
+Tue, May 30, 2023, 5:02:11 PM
+
+Hello Jan,
+
+ 
+
+I hope you are doing fine!
+
+ 
+
+I missed the last mail from the Azure portal, thanks a lot for sharing it again. I will take a look at the logs you uploaded and try to give you an update as soon as possible.
+
+ 
+
+Related to the part of the mail where you told us that the standard images work fine, can you confirm to me if you ran the same script and it worked? Or did you deployed this machines manually with a normal deploy method?
+
+ 
+
+Kind regards,
+
+ 
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+
+ 
+
+From: Jan Hein Lever <janheinl@topdesk.com>
+Sent: Tuesday, May 30, 2023 11:43 AM
+To: Microsoft Support <supportmail@microsoft.com>; Damian Martinez Lojo (CONVERGYS CORPORATION) <v-damianm@microsoft.com>
+Subject: [EXTERNAL] Re: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+	
+
+You don't often get email from janheinl@topdesk.com. Learn why this is important
+	
+
+Hi Damián,
+
+ 
+
+Last week I replied to your e-mail in the ticket in the Azure Portal, but I'm not entirely sure if that reply reached you as intended.
+
+ 
+
+The answers to your questions from my response in the Portal from last week:
+
+- The code mentioned was based on Microsoft documentation as for example found here: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/install-a-new-windows-server-2012-active-directory-child-or-tree-domain--level-200-
+
+- I can reproduce the exact same problem/error message also by clicking together both a root and a child domain on two VMs with the 'Active Directory Domain Services Configuration Wizard' from the Server Manager (as shown in the link above also) with the images and conditions described in my earlier messages in this incident
+
+- Our set-up worked fine before the 24th of April with the standard Windows Server 2016/2022 images
+
+ 
+
+I also added a zip-file with the dcpromo and dcpromoui logfiles to the Portal and some extra information for the error "The RPC server is unavailable" given:
+
+DCPromo.General.54,Microsoft.DirectoryServices.Deployment.PowerShell.Commands.InstallADDSDomainCommand
+
+Would you have an idea on how we can best progress with this issue?
+
+Kind regards,
+Jan Hein Lever
+
+TOPdesk SaaS
+
+From: Damian M <support@mail.support.microsoft.com>
+Sent: Thursday, May 25, 2023 12:21 PM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Cc: Damian Martinez Lojo <v-damianm@microsoft.com>
+Subject: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+ 
+
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+
+ 
+
+Hello Jan,
+
+Thank you for contacting Microsoft Support. My name is Damián Martínez and I am the Support Professional who will be working with you on your support request. You can reach me using the contact information in my signature.
+
+You have requested to be contacted by email only. However, if you would like to discuss your issue by phone at any time please provide a phone number and let me know when is the best time to call.
+
+I understand that the issue is related to problems when you try to create and deploy a root domain and a child domain using an script. To begin working on your support request could you please provide the below information:
+ 
+
+    This script that you mentioned, can you explain me exactly from where you took it? I mean, it was given to you from the Microsoft team or it appears in any official documentation?
+    If you deploy manually with the same ISO’s the root and child domain it works properly? The issue only appears when you try to deploy everything using the script?
+    This script worked in any previous time?
+
+
+Kind regards,
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+
+ 
+janheinl@topdesk.com
+Tue, May 30, 2023, 11:43:29 AM
+Hi Damián,
+
+Last week I replied to your e-mail in the ticket in the Azure Portal, but I'm not entirely sure if that reply reached you as intended.
+
+The answers to your questions from my response in the Portal from last week:
+
+- The code mentioned was based on Microsoft documentation as for example found here: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/install-a-new-windows-server-2012-active-directory-child-or-tree-domain--level-200-
+- I can reproduce the exact same problem/error message also by clicking together both a root and a child domain on two VMs with the 'Active Directory Domain Services Configuration Wizard' from the Server Manager (as shown in the link above also) with the images and conditions described in my earlier messages in this incident
+- Our set-up worked fine before the 24th of April with the standard Windows Server 2016/2022 images
+
+I also added a zip-file with the dcpromo and dcpromoui logfiles to the Portal and some extra information for the error "The RPC server is unavailable" given:
+
+DCPromo.General.54,Microsoft.DirectoryServices.Deployment.PowerShell.Commands.InstallADDSDomainCommand
+
+Would you have an idea on how we can best progress with this issue?
+
+Kind regards,
+Jan Hein Lever
+
+TOPdesk SaaS
+
+From: Damian M <support@mail.support.microsoft.com>
+Sent: Thursday, May 25, 2023 12:21 PM
+To: Jan Hein Lever <janheinl@topdesk.com>
+Cc: Damian Martinez Lojo <v-damianm@microsoft.com>
+Subject: Problem creating Windows AD child domain - TrackingID#2305170050001261
+ 
+
+ ATTENTION: This email originated from outside of the organization. For more information: please visit KI 1284
+
+Hello Jan,
+
+Thank you for contacting Microsoft Support. My name is Damián Martínez and I am the Support Professional who will be working with you on your support request. You can reach me using the contact information in my signature.
+
+You have requested to be contacted by email only. However, if you would like to discuss your issue by phone at any time please provide a phone number and let me know when is the best time to call.
+
+I understand that the issue is related to problems when you try to create and deploy a root domain and a child domain using an script. To begin working on your support request could you please provide the below information:
+ 
+
+    This script that you mentioned, can you explain me exactly from where you took it? I mean, it was given to you from the Microsoft team or it appears in any official documentation?
+    If you deploy manually with the same ISO’s the root and child domain it works properly? The issue only appears when you try to deploy everything using the script?
+    This script worked in any previous time?
+
+
+Kind regards,
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+ 
+janheinl@topdesk.com
+Fri, May 26, 2023, 3:29:17 PM
+
+Hi Support,
+
+Would you have an update or an idea on how we can best proceed with this problem?
+
+Unless we are really doing something specifically strange on our Azure VNET´s I would expect this situation to be quite easy to reproduce with two newly created Windows Server 2016/2022 VM's in the same subnet in any Azure subscription.
+
+For some extra information: the full error from Powershell with some extra context (as mentioned I get the exact same error when creating the child domain by clicking through the Server Manager):
+
+Install-ADDSDomain : The operation failed with the following error:
+The RPC server is unavailable.
+At line:2 char:1
++ Install-ADDSDomain `
++ ~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:) [Install-ADDSDomain], DCPromoExecutionException
+    + FullyQualifiedErrorId : DCPromo.General.54,Microsoft.DirectoryServices.Deployment.PowerShell.Commands.InstallADDSDomainCommand
+
+I will upload a zip-file with the c:\\windows\\debug folder with the dcpromo and dcpromoui logs of a new reproduction this morning to this request as well.
+
+Kind regards,
+Jan Hein Lever
+
+janheinl@topdesk.com
+Thu, May 25, 2023, 12:39:52 PM
+
+Hi Damián,
+
+Thanks for the update. The code mentioned was based on Microsoft documentation as for example found here: https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/deploy/install-a-new-windows-server-2012-active-directory-child-or-tree-domain--level-200-
+
+I can reproduce the exact same problem/error message also by clicking together both a root and a child domain on two VMs with the 'Active Directory Domain Services Configuration Wizard' from the Server Manager (as shown in the link above also) with the images and conditions described in my earlier messages in this incident.
+
+Our set-up worked fine before the 24th of April with the standard Windows Server 2016/2022 images.
+
+Contact by telephone is not very practical for me, but I am available for calls on Teams: j.lever@topdesk.com (or janheinl@topdesk.com)
+
+Kind regards,
+Jan Hein Lever
+
+support@mail.support.microsoft.com
+Thu, May 25, 2023, 12:21:48 PM
+Hello Jan,
+
+Thank you for contacting Microsoft Support. My name is Damián Martínez and I am the Support Professional who will be working with you on your support request. You can reach me using the contact information in my signature.
+
+You have requested to be contacted by email only. However, if you would like to discuss your issue by phone at any time please provide a phone number and let me know when is the best time to call.
+
+I understand that the issue is related to problems when you try to create and deploy a root domain and a child domain using an script. To begin working on your support request could you please provide the below information:
+ 
+
+    This script that you mentioned, can you explain me exactly from where you took it? I mean, it was given to you from the Microsoft team or it appears in any official documentation?
+    If you deploy manually with the same ISO’s the root and child domain it works properly? The issue only appears when you try to deploy everything using the script?
+    This script worked in any previous time?
+
+
+Kind regards,
+
+Damián Martínez Lojo
+EMEA Windows Platforms Support Specialist
+
+
+
+Concentrix on behalf of Microsoft Customer Service and Support
+Email: v-damianm@microsoft.com
+
+Support for business: https://smallbusiness.support.microsoft.com
+MPN Support: https://mspartner.microsoft.com
+Safety & Security Center:: https://www.microsoft.com/security
+
+If you have any feedback about my work, please let either myself or my managers:
+CNX_LaC_TMs@microsoft.com
+
+
+Note: This email may contain confidential information. If you are not named on the addressee list, please take no action in relation to this email, do not open any attachment and please contact the sender (details above) immediately.
+ 
+janheinl@topdesk.com
+Tue, May 23, 2023, 10:51:48 AM
+
+Hi Support,
+
+Would you have any idea on what could be the issue for this case or if we may have misconfigured something somewhere?
+
+I have tried several other things, all of these on two VMs in the same subnet with the local firewalls switched off:
+- older images, 20348.1487.230106 from January for 2022-datacenter
+- different images, 2022-datacenter-azure-edition-smalldisk
+- different manual DNS settings instead of dns only on NIC of child dc (root dc on 127.0.0.1 and child dc on IP of root dc etc.)
+- adjusted flags in the Powershell commands used
+- manually clicking in the Server Manager to create a root- and child domain
+- checked all services/registry keys that are generally involved with the error 'The RPC server is unavailable.' and they all seem ok
+
+But in all of these cases I keep getting the 'The RPC server is unavailable.' error when creating the child domain.
+
+Kind regards,
+Jan Hein Lever
+
+janheinl@topdesk.com
+Fri, May 19, 2023, 9:57:51 AM
+
+Hi Abhilash,
+
+I have gone through the earlier mail correspondence and replied earlier this week.
+
+Today I am available for a call to update you on the case, I can be found on Teams if that works for you.
+
+Kind regards,
+Jan Hein Lever
+
+support@mail.support.microsoft.com
+Thu, May 18, 2023, 11:21:45 PM
+
+Hello Jan,
+
+Hope you are doing well.
+
+My name is Abhilash, and I am following up case on behalf of SE Rahul.
+
+Please let us know if you were able to go through the last email communication done on the case.
+
+We can schedule our call to have proper understanding on case.
+
+Please let us know your availability so that we can schedule our call accordingly.
+
+Thank you.
+ 
+Regards,
+Abhilash Kable	 	 
+Microsoft Azure Iaas Support Engineer	v-abkable@microsoft.com
+Working Hours: 09:00 PM – 06:30 AM IST (UTC + 5:30)	 
+If you need to work with another Engineer outside of my working hours, please send email to azurebu@microsoft.com   with your case number, and availability.
+We are always interested to hear your feedback. Please feel free to reach my manager regarding the level of service you have received.  v-rajp2@microsoft.com
+
+Microsoft Azure | Azure Status | Support Plans | Create a Case | Privacy Policy
+------------------- Original Message -------------------
+From: support@mail.support.microsoft.com;
+Received: Wed May 17 2023 16:43:01 GMT+0530 (India Standard Time)
+To: # Microsoft Support <supportcommunication@microsoft.com>; # Microsoft Support <supportcommunication@microsoft.com>;
+Cc: v-rrangari@microsoft.com;
+Subject: RE: Problem creating Windows AD child domain - TrackingID#2305170050001261
+
+Hi Jan,
+ 
+Greetings of the Day.
+ 
+Thanks for details you have provided. 
+ 
+We would like to check this issue over a remote session once and will perform this operations manually through the GUI and lets see if we got same error. 
+ 
+The error will be helpful for us to take help from Windows Team.
+
+Please let us know your availability for tomorrow and send the meeting invite accordingly. 
+ 
+Regards,
+Rahul S. Rangari        
+Support Engineer                                                  v-rrangari@microsoft.com
+Microsoft Azure Technical Support                   Working hours: 01:00 PM to 10:00 PM IST
+Customer Service and Support                          Working days: Monday - Friday                
+If you need to work with another Support Engineer outside of my working hours, please send email to azurebu@microsoft.com with your case number, and availability.
+We are always interested to hear your feedback. Please feel free to reach my manager regarding the level of service you have received. Jatin Chadda | v-jatc@microsoft.com and my TA Omkar Shinagare| v-shinagareo@microsoft.com or Nilesh Jha | v-nileshjha@microsoft.com
+------------------- Original Message -------------------
+From: # Microsoft Support <supportcommunication@microsoft.com>;
+Received: Wed May 17 2023 16:43:01 GMT+0530 (India Standard Time)
+To: # Microsoft Support <supportcommunication@microsoft.com>; Rahul Rangari <v-rrangari@microsoft.com>;
+Subject: Problem creating Windows AD child domain - TrackingID#2305170050001261
+ 
+
+A small correction for my original reproduction recipe, since that mentions two VMs with the same name, there are of course two VMs with the following corrected details:
+
+name: ac3jhrootdc01
+IP: 10.228.151.222
+virtual network subnet: AC3VNET01/AC3SUBCORE01
+DNS: internal dns servers set on AC3VNET01
+
+name: ac3jhtestdc01
+IP: 10.228.151.242
+virtual network subnet: AC3VNET01/AC3SUBCORE01
+DNS: set to root domain controller 10.228.151.222 on NIC
+
+Kind regards,
+Jan Hein Lever
+
+janheinl@topdesk.com
+Wed, May 17, 2023, 1:13:01 PM
+
+A small correction for my original reproduction recipe, since that mentions two VMs with the same name, there are of course two VMs with the following corrected details:
+
+name: ac3jhrootdc01
+IP: 10.228.151.222
+virtual network subnet: AC3VNET01/AC3SUBCORE01
+DNS: internal dns servers set on AC3VNET01
+
+name: ac3jhtestdc01
+IP: 10.228.151.242
+virtual network subnet: AC3VNET01/AC3SUBCORE01
+DNS: set to root domain controller 10.228.151.222 on NIC
+
+Kind regards,
+Jan Hein Lever
+
+janheinl@topdesk.com
+Wed, May 17, 2023, 1:04:15 PM
+
+Hi Rahul,
+
+Thanks for the update, hope you are having a great day too!
+
+To answer your questions:
+1. the original script is customized, but I can reproduce the problem with the exact code added to this Support Request
+2. for this reproduction of the problem I have run the code from a Powershell ISE after deploying both VMs (as seen in the screenshots)
+3. please find enclosed the earlier uploaded screenshots
+4. I can reproduce the problem with both the latest versions of the standard Windows Server 2016 and 2022 smalldisk images, image SKUs:
+- 2016-datacenter-smalldisk
+- 2022-datacenter-smalldisk
+
+The problem started to appear on the 24th of April. My availability is very limited today and tomorrow, but I will have time for a remote session this Friday during European office hours if that would be convenient for you.
+
+Kind regards,
+Jan Hein Lever
+
+TOPdesk SaaS
+
+support@mail.support.microsoft.com
+Wed, May 17, 2023, 12:09:37 PM
+Hello Jan,
+ 
+Hope you are doing good!
+ 
+Thank you for contacting Microsoft Support. My name is Rahul from Azure IaaS Platform VM Team.
+ 
+I am the Support Professional who will be working with you on this Service Request. You may reach me using the contact information listed below, referencing the Case/SR 2305170050001261.
+ 
+As per the verbatim, we understood that you are trying to create an Root domain controller and Child Domain Controller using a script. This script was working fine earlier but recently its failing with error "RPC Server is not available."
+ 
+We would like to check the issue over a remote session.
+ 
+Meanwhile please provide us below information.
+ 
+1. Is this script customized? 
+2. Are you using Powershell to push this script to Azure?
+3. Please provide the screenshots of error while performing same operation manually from Server.
+4. Are you using any Specialized or Generalized image to create this VM's? If yes, name of Image. 
+​​​​​​​
+We would like to know since when you are facing this issue.
+ 
+Please note that my shift timings are from 01:00 PM to 10:00 PM IST and if you are working in different time zone, please update the same.
+ 
+Looking forward to hearing from you.
+Have a great day ahead!
+​​​​​​​
+Regards,
+Rahul S. Rangari        
+Support Engineer                                                  v-rrangari@microsoft.com
+Microsoft Azure Technical Support                   Working hours: 01:00 PM to 10:00 PM IST
+Customer Service and Support                          Working days: Monday - Friday                
+If you need to work with another Support Engineer outside of my working hours, please send email to azurebu@microsoft.com with your case number, and availability.
+We are always interested to hear your feedback. Please feel free to reach my manager regarding the level of service you have received. Jatin Chadda | v-jatc@microsoft.com and my TA Omkar Shinagare| v-shinagareo@microsoft.com or Nilesh Jha | v-nileshjha@microsoft.com
+
+Give Feedback

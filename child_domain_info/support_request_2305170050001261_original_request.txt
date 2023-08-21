@@ -1,0 +1,126 @@
+Overview
+Severity    C
+Status  Open
+Support request ID  2305170050001261
+Created on  Wed, May 17, 2023, 11:04:54 AM
+Created by  Jan Hein Lever
+Contact method  Email: janheinl@topdesk.com
+Support plan    Standard
+Advanced diagnostic information Permission granted
+View All
+Give Feedback
+
+Tell us about your experience with support request overview
+Hi Support,
+
+We have an automated pipeline on our Azure environment that creates both a Windows AD root domain and a Windows AD child domain that joins to that root domain which worked fine up until a few weeks ago. Since a few weeks it fails on creating the child domain with the error:
+
+Install-ADDSDomain : The operation failed with the following error:
+The RPC server is unavailable.
+
+At first I thought something had changed in my code or in our networking set-up, but I can reproduce the error with two test VMs in the same subnet (without NSG's blocking traffic) and their local Windows firewall switched off, for both a Windows Server 2016 and a 2022 image (2016-datacenter-smalldisk and 2022-datacenter-smalldisk), either by using Powershell or clicking through the server manager to set up the domains.
+
+I have checked all relevant services/settings that are generally related to this error (for example here: https://learn.microsoft.com/en-us/troubleshoot/windows-server/user-profiles-and-logon/not-log-on-error-rpc-server-unavailable) and all these settings/services look ok. Also, the newly created root domain can be resolved without issues from the test VM I create the child domain on.
+
+Would you happen to know if any changes in the Windows images or possibly Azure networking or Windows updates can explain this sudden change of behaviour for this situation?
+
+
+Reproduction recipe:
+
+
+root domain controller configuration: 
+
+name: ac3jhrootdc01
+IP: 10.228.151.222
+virtual network subnet: AC3VNET01/AC3SUBCORE01
+DNS: internal dns servers set on AC3VNET01
+
+Powershell to create root domain and site for child domain:
+
+$root_domain = 'tst.loc'
+$netbios_name = 'tst'
+$root_dc_admin_username = 'henk'
+$root_dc_admin_password = 'testerdetest01!'
+
+Install-WindowsFeature -name AD-Domain-Services, DNS -IncludeManagementTools
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+
+$password = ConvertTo-SecureString $root_dc_admin_password -AsPlainText -Force
+$credential = New-Object System.Management.Automation.PSCredential ($root_dc_admin_username, $password)
+
+Import-Module ADDSDeployment
+Install-ADDSForest `
+-DomainName '$root_domain' `
+-SafeModeAdministratorPassword $password `
+-DnsDelegationCredential $credential `
+-DatabasePath 'C:\\Windows\\NTDS' `
+-DomainMode 'Win2012R2' `
+-DomainNetbiosName '$netbios_name' `
+-ForestMode 'Win2012R2' `
+-InstallDns `
+-LogPath 'C:\\Windows\\NTDS' `
+-SysvolPath 'C:\\Windows\\SYSVOL' `
+-Force `
+-Confirm:$false `
+-NoRebootOnCompletion:$true `
+-ErrorAction Stop
+
+After reboot, create site for child domain to join on:
+
+$site_name = 'ts1'
+$site_subnet = '10.228.0.0/16'
+
+Import-Module ActiveDirectory
+New-ADReplicationSite -Name $site_name
+New-ADReplicationSubnet -Name $site_subnet -Site $site_name
+Set-ADReplicationSiteLink -Identity 'DEFAULTIPSITELINK' -SitesIncluded @{Add='$site_name'}
+repadmin /syncall
+
+
+child domain controller configuration: 
+
+name: ac3jhrootdc01
+IP: 10.228.151.242
+virtual network subnet: AC3VNET01/AC3SUBCORE01
+DNS: set to root domain controller 10.228.151.222 on NIC
+
+# can ping tst.loc at this point
+
+Powershell configuration for creating the child domain:
+
+$root_domain = 'tst.loc'
+$site_name = 'ts1'
+$root_dc_admin_username = 'henk'
+$root_dc_admin_password = 'testerdetest01!'
+
+Install-WindowsFeature -name AD-Domain-Services, DNS -IncludeManagementTools
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
+
+$password = ConvertTo-SecureString $root_dc_admin_password -AsPlainText -Force
+$credential = New-Object System.Management.Automation.PSCredential ('$root_dc_admin_username@$root_domain', $password)
+
+Import-Module ADDSDeployment
+Install-ADDSDomain `
+-SafeModeAdministratorPassword $password `
+-Credential $credential `
+-DomainMode 'Default' `
+-DomainType 'ChildDomain' `
+-SiteName '$site_name' `
+-NewDomainName '$site_name' `
+-NewDomainNetbiosName '$site_name' `
+-ParentDomainName '$root_domain' `
+-DatabasePath 'C:\\Windows\\NTDS'  `
+-SysvolPath 'C:\\Windows\\SYSVOL' `
+-LogPath 'C:\\Windows\\NTDS' `
+-NoRebootOnCompletion:$true `
+-CreateDnsDelegation:$true `
+-NoGlobalCatalog:$false `
+-InstallDns:$true `
+-Confirm:$false `
+-Force:$true `
+-ErrorAction Stop
+
+The Install-ADDSDomain commandlet gives the 'The RPC server is unavailable.' error at this point.
+
+Problem start date and time
+Not sure, use current time
